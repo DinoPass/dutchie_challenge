@@ -8,9 +8,12 @@ const API_URL = 'http://localhost:1337/get-products';
 type Product = {
   id: string;
   name: string;
-  prices: number;
+  prices: number[];
   image: string;
-  title: string
+  title: string;
+  strainType: string;
+  thcContent: string;
+  cbdContent: string;
 };
 async function fetchProducts(): Promise<Product[]> {
   const res = await fetch(API_URL);
@@ -52,6 +55,9 @@ export function YourStorefront() {
             name={product.name}
             imgUrl={product.image}
             title={product.title}
+            strainType={product.strainType}
+            thcContent={product.thcContent}
+            cbdContent={product.cbdContent}
           />
         ))}
       </ProductGrid>
