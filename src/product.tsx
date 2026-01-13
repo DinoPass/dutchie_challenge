@@ -12,6 +12,11 @@ async function fetchProduct(id: string) {
   
 }
 
+type Product = {
+  name: string;
+};
+
+
 export function ProductPage() {
 
   const { id } = useParams<{ id: string }>();
@@ -21,10 +26,11 @@ export function ProductPage() {
     queryFn: () => fetchProduct(id!),
     enabled: !!id
   });
+
 if (isLoading) return <div>Loading…</div>;
 if (isError || !product) return <div>Error loading product.</div>;
-console.log({ product, isLoading, isError });
-  console.log('ProductPage id:', product.title);
+
+
   return (
     <Container>
       <Header>{product.name}</Header>
@@ -35,7 +41,6 @@ console.log({ product, isLoading, isError });
       <ImageContainer>
         <img
           src={product.image}
-         
         />
       </ImageContainer>
     </Container>

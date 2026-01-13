@@ -18,7 +18,6 @@ type ProductProps = {
 export function ProductCard({ id, name, prices, title, imgUrl, strainType, thcContent, cbdContent }: ProductProps) {
 
 const displayPrice = Array.isArray(prices) ? prices[0] : prices;
-console.log('ProductCard id:', id);
 
   return (
     <Link to={`/product/${id}`}>
