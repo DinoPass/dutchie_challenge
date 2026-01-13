@@ -12,35 +12,38 @@ async function fetchProduct(id: string) {
   
 }
 
-type Product = {
-  name: string;
+type ProductPageProp = {
+  name?: string;
+  description?: string;
+  image?: string;
 };
 
 
-export function ProductPage() {
+export function ProductPage({ product: testProduct }: { product?: ProductPageProp }) {
 
   const { id } = useParams<{ id: string }>();
-
-  const { data: product, isLoading, isError } = useQuery({
+    
+ const { data: fetchedProduct, isLoading, isError } = useQuery({
     queryKey: ['product', id],
     queryFn: () => fetchProduct(id!),
     enabled: !!id
   });
+let displayProduct = testProduct || fetchedProduct;
 
 if (isLoading) return <div>Loading…</div>;
-if (isError || !product) return <div>Error loading product.</div>;
+if (isError || !displayProduct) return <div>Error loading product.</div>;
 
 
   return (
     <Container>
-      <Header>{product.name}</Header>
+      <Header>{displayProduct.name}</Header>
       <Divider />
       <Description>
-        {product.description}
+        {displayProduct.description}
       </Description>
       <ImageContainer>
         <img
-          src={product.image}
+          src={displayProduct.image}
         />
       </ImageContainer>
     </Container>
