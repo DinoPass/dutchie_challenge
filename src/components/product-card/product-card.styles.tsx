@@ -12,6 +12,25 @@ export const CardContainer = styled.div`
   flex-direction: column;
   border-radius: 5px;
   cursor: pointer;
+  padding: 0 12px 0 12px;
+  margin: 0 7px 0 7px;
+
+  a {
+    text-decoration: none;
+    
+  }
+
+  h3 {
+    color: #7fb5e9;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    text-decoration: none;
+  }
+  
+  p {
+    color: #666;
+    font-weight: 600;
+  }
 `;
 
 export const Image = styled.img`

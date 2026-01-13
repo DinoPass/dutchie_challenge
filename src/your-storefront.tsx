@@ -6,44 +6,52 @@ import { ProductCard } from './components/product-card';
 const API_URL = 'http://localhost:1337/get-products';
 
 type Product = {
+  id: string;
   name: string;
+  prices: number;
+  image: string;
+  title: string
 };
-
-async function fetchItems(): Promise<Product[]> {
+async function fetchProducts(): Promise<Product[]> {
   const res = await fetch(API_URL);
   if (!res.ok) throw new Error('failed to fetch');
   return res.json();
 }
 
 export function YourStorefront() {
+  
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
-    queryFn: fetchItems,
+    queryFn: fetchProducts,
   });
 
   if (isLoading) {
     return (
-        <div>
-        Loading…
-        </div>
+      <div>
+        loading…
+      </div>
     );
   }
 
   if (error) {
     return (
       <div>
-        Error loading products
+        product error
       </div>
     );
   }
-
-  // At this point, products is guaranteed to exist
+  
+  
   return (
     <PageWrapper heading="Your Storefront" icon="menu">
       <ProductGrid>
-        {items!.map((product) => (
+        {products!.map((product) => (
           <ProductCard
+            key={product.id}
+            prices={product.prices}
             name={product.name}
+            imgUrl={product.image}
+            title={product.title}
           />
         ))}
       </ProductGrid>
