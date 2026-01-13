@@ -5,6 +5,7 @@ import { CardContainer, Image } from './product-card.styles';
 
 
 type ProductProps = {
+  id: string;
   name: string;
   prices: number[];
   imgUrl: string;
@@ -14,12 +15,13 @@ type ProductProps = {
   cbdContent: string;
 }
 
-export function ProductCard({ name, prices, title, imgUrl, strainType, thcContent, cbdContent }: ProductProps) {
-console.log('Price prop:', prices, 'typeof:', typeof prices);
+export function ProductCard({ id, name, prices, title, imgUrl, strainType, thcContent, cbdContent }: ProductProps) {
+
 const displayPrice = Array.isArray(prices) ? prices[0] : prices;
+console.log('ProductCard id:', id);
 
   return (
-    <Link to={'/product'}>
+    <Link to={`/product/${id}`}>
       <CardContainer>
         <Image src={imgUrl} alt={name} title={title} />
         <h3>${displayPrice.toFixed(2)}</h3>

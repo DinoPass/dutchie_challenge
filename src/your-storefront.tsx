@@ -22,7 +22,7 @@ async function fetchProducts(): Promise<Product[]> {
 }
 
 export function YourStorefront() {
-  
+ 
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProducts,
@@ -49,8 +49,10 @@ export function YourStorefront() {
     <PageWrapper heading="Your Storefront" icon="menu">
       <ProductGrid>
         {products!.map((product) => (
+          
           <ProductCard
             key={product.id}
+            id={product.id}
             prices={product.prices}
             name={product.name}
             imgUrl={product.image}

@@ -1,6 +1,29 @@
 import styled from '@emotion/styled';
+import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
+const API_URL = 'http://localhost:1337/get-products';
+
+async function fetchProduct(id: string) {
+
+  const res = await fetch(API_URL);
+  if (!res.ok) throw new Error('Failed to fetch products');
+  const products = await res.json();
+  return products.find((p: any) => p.id === id);
+  
+}
 
 export function ProductPage() {
+
+  const { id } = useParams<{ id: string }>();
+
+  const { data: product, isLoading, isError } = useQuery({
+    queryKey: ['product', id],
+    queryFn: () => fetchProduct(id!),
+    enabled: !!id
+  });
+
+console.log({ product, isLoading, isError });
+  console.log('ProductPage id:', id);
   return (
     <Container>
       <Header>(Placeholder) Cheeba Chews | Sativa Chocolate Taffy</Header>

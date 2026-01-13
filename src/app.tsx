@@ -10,6 +10,11 @@ import { theme } from 'utils/theme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ProductPage } from './product';
 
+
+type ProductProps = {
+  name: string;
+}
+
 export function App() {
   const queryClient = new QueryClient();
   return (
@@ -22,7 +27,7 @@ export function App() {
             <Routes>
               <Route path='/' element={<HomePage />} />
               <Route path='/your-storefront' element={<YourStorefront />} />
-              <Route path='/product' element={<ProductPage />} />
+              <Route path='/product/:id' element={<ProductPage />} />
             </Routes>
           </Wrapper>
         </ThemeProvider>
