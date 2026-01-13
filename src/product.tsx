@@ -8,7 +8,7 @@ async function fetchProduct(id: string) {
   const res = await fetch(API_URL);
   if (!res.ok) throw new Error('Failed to fetch products');
   const products = await res.json();
-  return products.find((p: any) => p.id === id);
+  return products.find((p: any) => String(p.id) === String(id))
   
 }
 
@@ -21,22 +21,21 @@ export function ProductPage() {
     queryFn: () => fetchProduct(id!),
     enabled: !!id
   });
-
+if (isLoading) return <div>Loading…</div>;
+if (isError || !product) return <div>Error loading product.</div>;
 console.log({ product, isLoading, isError });
-  console.log('ProductPage id:', id);
+  console.log('ProductPage id:', product.title);
   return (
     <Container>
-      <Header>(Placeholder) Cheeba Chews | Sativa Chocolate Taffy</Header>
+      <Header>{product.name}</Header>
       <Divider />
       <Description>
-        This is a placeholder product detail page. It will contain the description, allotment details, and other product
-        information.
+        {product.description}
       </Description>
       <ImageContainer>
         <img
-          src={
-            'https://images.dutchie.com/519e2ac68c3968e4b20d9910e3b473aa?auto=format&dpr=2&bg=FFFFFF&crop=faces&fit=crop&max-h=291&max-w=409&min-h=291&min-w=409&ixlib=react-7.2.0'
-          }
+          src={product.image}
+         
         />
       </ImageContainer>
     </Container>
