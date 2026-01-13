@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 
 import { CardContainer, Image } from './product-card.styles';
 
-export const ProductCard = () => {
+
+type ProductProps = {
+  name: string
+}
+
+export function ProductCard({ name }: ProductProps) {
   return (
     <Link to={'/product'}>
       <CardContainer>
@@ -12,8 +17,14 @@ export const ProductCard = () => {
           alt={'Cheeba Chews'}
           title={'A picture of Cheeba Chews'}
         />
-        put your product info here
+        
+        <h3>{name}</h3>
+        
       </CardContainer>
     </Link>
-  );
-};
+  )
+}
+
+
+import { useQuery } from '@tanstack/react-query'
+
