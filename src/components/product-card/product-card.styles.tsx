@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 const borderColor = '#D8DEE3';
 
 // Components
-export const CardContainer = styled.div`
+export const CardContainer = styled.article`
   width: 300px;
   height: 430px;
   border: 1px solid ${borderColor};
@@ -22,7 +22,7 @@ export const CardContainer = styled.div`
 
   h3 {
     color: #7fb5e9;
-    font-size: 1.25rem;
+    font-size: 1rem;
     margin-bottom: 0;
     text-decoration: none;
   }
@@ -34,19 +34,24 @@ export const CardContainer = styled.div`
   border-radius: 3px;
   background-color: #eef4fb;
   border: 1px solid #d4dce4;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #777;
+  color: #555;
   margin: 10px 0 5px 0;
 }
+  figure figcaption {
+    color: #666;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: block;
+    margin: 0 0 20px 0;
+  }
   
   p {
     color: #666;
+    font-size: 0.8rem;
     font-weight: 600;
     margin: 5px 0 5px 0;
-  }
-  p:nth-of-type(2) {
-    font-weight: normal;
     color: #616c79;
   }
 `;

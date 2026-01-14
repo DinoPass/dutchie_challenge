@@ -2,8 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { PageWrapper } from './components/layout/page-wrapper';
 import styled from '@emotion/styled';
 import { ProductCard } from './components/product-card';
-
-const API_URL = 'http://localhost:1337/get-products';
+import { fetchProducts } from './queries/productQueries'
 
 type Product = {
   id: string;
@@ -15,14 +14,9 @@ type Product = {
   thcContent: string;
   cbdContent: string;
 };
-async function fetchProducts(): Promise<Product[]> {
-  const res = await fetch(API_URL);
-  if (!res.ok) throw new Error('failed to fetch');
-  return res.json();
-}
 
 export function YourStorefront() {
- 
+
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProducts,

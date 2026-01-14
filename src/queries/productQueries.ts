@@ -11,13 +11,13 @@ type Product = {
   thcContent: string;
   cbdContent: string;
 };
-async function fetchProducts(): Promise<Product[]> {
+export async function fetchProducts(): Promise<Product[]> {
   const res = await fetch(API_URL);
   if (!res.ok) throw new Error('failed to fetch');
   return res.json();
 }
 
-async function fetchProduct(id: string) {
+export async function fetchProduct(id: string) {
 
   const res = await fetch(API_URL);
   if (!res.ok) throw new Error('Failed to fetch products');
