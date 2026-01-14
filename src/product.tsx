@@ -1,16 +1,16 @@
 import styled from '@emotion/styled';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
-const API_URL = 'http://localhost:1337/get-products';
+// const API_URL = 'http://localhost:1337/get-products';
 
-async function fetchProduct(id: string) {
+// async function fetchProduct(id: string) {
 
-  const res = await fetch(API_URL);
-  if (!res.ok) throw new Error('Failed to fetch products');
-  const products = await res.json();
-  return products.find((p: any) => String(p.id) === String(id))
+//   const res = await fetch(API_URL);
+//   if (!res.ok) throw new Error('Failed to fetch products');
+//   const products = await res.json();
+//   return products.find((p: any) => String(p.id) === String(id))
   
-}
+// }
 
 type ProductPageProp = {
   name?: string;
