@@ -61,7 +61,7 @@ const Header = styled.h1`
   text-align: center;
   margin: 0;
 `;
-const ProductName = styled.h2`
+const ProductName = styled.div`
   color: #666;
   font-weight: 600;
 `;
