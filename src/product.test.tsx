@@ -5,19 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ProductPage } from './product';
 const queryClient = new QueryClient();
 describe('ProductPage', () => {
-  it('renders the product name', async () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <ProductPage product={{ name: 'Test Product' }} />
-        </BrowserRouter>
-      </QueryClientProvider>
-    );
-
-    await waitFor(() => {
-      expect(screen.getByText('Test Product')).toBeInTheDocument();
-    });
-  });
+  
 
   it('renders the product name, description, image, and back link', async () => {
     const testProduct = {
