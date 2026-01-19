@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { PageWrapper } from './components/layout/page-wrapper';
 import styled from '@emotion/styled';
 import { ProductCard } from './components/product-card';
-import { fetchProducts } from './queries/productQueries'
+import { fetchProducts } from './queries/productQueries';
 
 type Product = {
   id: string;
@@ -28,7 +28,7 @@ export function YourStorefront() {
         loading…
       </div>
     );
-  }
+  };
 
   if (error) {
     return (
@@ -36,14 +36,13 @@ export function YourStorefront() {
         product error
       </div>
     );
-  }
-  
-  
+  };
+
   return (
     <PageWrapper heading="Your Storefront" icon="menu">
       <ProductGrid>
         {products!.map((product) => (
-          
+
           <ProductCard
             key={product.id}
             id={product.id}
@@ -55,7 +54,7 @@ export function YourStorefront() {
             thcContent={product.thcContent}
             cbdContent={product.cbdContent}
           />
-        ))}
+        ))};
       </ProductGrid>
     </PageWrapper>
   );

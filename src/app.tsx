@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { ThemeProvider } from '@emotion/react';
-
 import { GlobalStyle } from './components/layout/global-style';
 import { Navigation } from './components/layout/navigation/index';
 import { HomePage } from './index';
@@ -10,13 +9,10 @@ import { theme } from 'utils/theme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ProductPage } from './product';
 
-
-type ProductProps = {
-  name: string;
-}
+const queryClient = new QueryClient();
 
 export function App() {
-  const queryClient = new QueryClient();
+
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
@@ -34,7 +30,7 @@ export function App() {
       </QueryClientProvider>
     </BrowserRouter>
   );
-}
+};
 
 const Wrapper = styled.div`
   display: flex;

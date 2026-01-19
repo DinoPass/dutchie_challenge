@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
-import { useNavigate, Link } from 'react-router-dom';
+import {Link, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
 import { fetchProduct } from './queries/productQueries';
-import { YourStorefront } from './your-storefront';
 
 type ProductPageProp = {
   name?: string;
@@ -11,22 +9,20 @@ type ProductPageProp = {
   image?: string;
 };
 
-
 export function ProductPage({ product: testProduct }: { product?: ProductPageProp }) {
 
-  const { id } = useParams<{ id: string }>()
-    
- const { data: fetchedProduct, isLoading, isError } = useQuery({
-    queryKey: ['product', id],
-    queryFn: () => fetchProduct(id!),
-    enabled: !!id
-  });
+  const { id } = useParams<{ id: string }>();
+  
+  const { data: fetchedProduct, isLoading, isError } = useQuery({
+  queryKey: ['product', id],
+  queryFn: () => fetchProduct(id as string),
+  enabled: Boolean(id),
+});
 
-let displayProduct = testProduct || fetchedProduct;
-const navigate = useNavigate()
+  let displayProduct = testProduct || fetchedProduct;
 
-if (isLoading) return <div>Loading…</div>;
-if (isError || !displayProduct) return <div>Error loading product.</div>;
+  if (isLoading) return <div>Loading…</div>;
+  if (isError || !displayProduct) return <div>Error loading product.</div>;
 
   return (
     <Container>
@@ -34,9 +30,9 @@ if (isError || !displayProduct) return <div>Error loading product.</div>;
         Back to Storefront
       </BackLink>
       <Header>
-      
+
         <ProductName>{displayProduct.name}</ProductName>
-        </Header>
+      </Header>
       <Divider />
       <Description>
         {displayProduct.description}
@@ -48,7 +44,7 @@ if (isError || !displayProduct) return <div>Error loading product.</div>;
       </ImageContainer>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   padding: 50px;
@@ -96,7 +92,6 @@ const BackLink = styled(Link)`
   text-decoration: none;
   border-radius: 4px;
   
-  
   &::before {
     content: "←";
     margin-right: 8px;
@@ -104,5 +99,4 @@ const BackLink = styled(Link)`
   &:hover {
     color: #999;
   }
-
 `
