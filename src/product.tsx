@@ -12,23 +12,25 @@ type ProductPageProp = {
 export function ProductPage({ product: testProduct }: { product?: ProductPageProp }) {
 
   const { id } = useParams<{ id: string }>();
-  
+
   const { data: fetchedProduct, isLoading, isError } = useQuery({
   queryKey: ['product', id],
   queryFn: () => fetchProduct(id as string),
   enabled: Boolean(id),
 });
 
-  let displayProduct = testProduct || fetchedProduct;
+  const displayProduct = testProduct ?? fetchedProduct;
 
   if (isLoading) return <div>Loading…</div>;
   if (isError || !displayProduct) return <div>Error loading product.</div>;
 
   return (
     <Container>
-      <BackLink to={'/your-storefront'}>
-        Back to Storefront
-      </BackLink>
+      <BackLinkWrapper>
+        <BackLink to={'/your-storefront'}>
+          Back to Storefront
+        </BackLink>
+        </BackLinkWrapper>
       <Header>
 
         <ProductName>{displayProduct.name}</ProductName>
@@ -40,6 +42,8 @@ export function ProductPage({ product: testProduct }: { product?: ProductPagePro
       <ImageContainer>
         <img
           src={displayProduct.image}
+          alt={displayProduct.name}
+          loading="lazy"
         />
       </ImageContainer>
     </Container>
@@ -75,13 +79,23 @@ const Description = styled.p`
   font-size: 0.9rem;
   line-height: 1.25rem;
   width: 85%;
+  max-height: 150px;
+  overflow-y: auto;
 `;
 
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 `;
 
+const BackLinkWrapper = styled.div`
+  padding-left: 10px;
+  margin-bottom: 20px;
+`;
 
 const BackLink = styled(Link)`
   display: inline-block;
@@ -91,12 +105,16 @@ const BackLink = styled(Link)`
   color: #163f66;
   text-decoration: none;
   border-radius: 4px;
-  
+
   &::before {
     content: "←";
     margin-right: 8px;
   }
-  &:hover {
+
+  &:hover,
+  &:focus {
     color: #999;
+    outline: 2px solid #ccc;
+    outline-offset: 2px;
   }
 `
