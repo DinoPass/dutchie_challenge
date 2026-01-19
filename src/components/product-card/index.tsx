@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CardContainer, Image } from './product-card.styles';
 
 type ProductProps = {
@@ -14,12 +13,11 @@ type ProductProps = {
 };
 
 export function ProductCard({ id, name, prices, title, imgUrl, strainType, thcContent, cbdContent }: ProductProps) {
-  
+  const navigate = useNavigate();
   const displayPrice = Array.isArray(prices) && prices.length > 0 ? prices[0] : 0;
 
   return (
-    <Link to={`/product/${id}`} title={`Product detail for ${name}`}>
-      <CardContainer>
+      <CardContainer onClick={() => navigate(`/product/${id}`)} tabIndex={0} role="button">
         <figure>
           <Image src={imgUrl} alt={name} title={title} />
           <figcaption>{name}</figcaption>
@@ -30,7 +28,6 @@ export function ProductCard({ id, name, prices, title, imgUrl, strainType, thcCo
           <strong>THC:</strong> {thcContent} | <strong>CBD:</strong> {cbdContent}
         </p>
       </CardContainer>
-    </Link>
   );
 }
 

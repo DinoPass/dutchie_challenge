@@ -24,17 +24,21 @@ export function YourStorefront() {
 
   if (isLoading) {
     return (
-      <div>
-        loading…
-      </div>
+      <PageWrapper heading="Your Storefront" icon="menu">
+        <ProductGrid>
+          loading…
+        </ProductGrid>
+      </PageWrapper>
     );
   }
 
   if (error) {
     return (
-      <div>
-        product error
-      </div>
+      <PageWrapper heading="Your Storefront" icon="menu">
+        <ProductGrid>
+          Error loading product
+        </ProductGrid>
+      </PageWrapper>
     );
   }
 
