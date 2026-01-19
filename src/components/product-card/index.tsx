@@ -14,10 +14,11 @@ type ProductProps = {
 };
 
 export function ProductCard({ id, name, prices, title, imgUrl, strainType, thcContent, cbdContent }: ProductProps) {
-  const displayPrice = Array.isArray(prices) ? prices[0] : prices;
+  
+  const displayPrice = Array.isArray(prices) && prices.length > 0 ? prices[0] : 0;
 
   return (
-    <Link to={`/product/${id}`}>
+    <Link to={`/product/${id}`} title={`Product detail for ${name}`}>
       <CardContainer>
         <figure>
           <Image src={imgUrl} alt={name} title={title} />
@@ -31,5 +32,5 @@ export function ProductCard({ id, name, prices, title, imgUrl, strainType, thcCo
       </CardContainer>
     </Link>
   );
-};
+}
 

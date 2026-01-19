@@ -28,7 +28,7 @@ export function YourStorefront() {
         loading…
       </div>
     );
-  };
+  }
 
   if (error) {
     return (
@@ -36,7 +36,7 @@ export function YourStorefront() {
         product error
       </div>
     );
-  };
+  }
 
   return (
     <PageWrapper heading="Your Storefront" icon="menu">
@@ -54,7 +54,7 @@ export function YourStorefront() {
             thcContent={product.thcContent}
             cbdContent={product.cbdContent}
           />
-        ))};
+        ))}
       </ProductGrid>
     </PageWrapper>
   );
@@ -62,4 +62,7 @@ export function YourStorefront() {
 
 const ProductGrid = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 `;

@@ -48,7 +48,7 @@ export function ProductPage({ product: testProduct }: { product?: ProductPagePro
       </ImageContainer>
     </Container>
   );
-};
+}
 
 const Container = styled.div`
   padding: 50px;
@@ -114,7 +114,7 @@ const BackLink = styled(Link)`
   &:hover,
   &:focus {
     color: #999;
-    outline: 2px solid #ccc;
+    outline: 2px solid #eee;
     outline-offset: 2px;
   }
-`
+`;
