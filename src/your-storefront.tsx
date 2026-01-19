@@ -4,17 +4,6 @@ import styled from '@emotion/styled';
 import { ProductCard } from './components/product-card';
 import { fetchProducts } from './queries/productQueries';
 
-type Product = {
-  id: string;
-  name: string;
-  prices: number[];
-  image: string;
-  title: string;
-  strainType: string;
-  thcContent: string;
-  cbdContent: string;
-};
-
 export function YourStorefront() {
 
   const { data: products, isLoading, error } = useQuery({
