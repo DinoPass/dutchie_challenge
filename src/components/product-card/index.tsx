@@ -16,9 +16,8 @@ export function ProductCard({ id, name, prices, title, imgUrl, strainType, thcCo
   const displayPrice = Array.isArray(prices) && prices.length > 0 ? prices[0] : 0;
 
   return (
-    <CardLink to={`/product/${id}`} tabIndex={0} role="button">
+    <CardLink to={`/product/${id}`} tabIndex={0} role='button'>
       <CardContainer>
-
         <figure>
           <Image src={imgUrl} alt={name} title={title} />
           <figcaption>{name}</figcaption>
@@ -28,9 +27,7 @@ export function ProductCard({ id, name, prices, title, imgUrl, strainType, thcCo
         <p>
           <strong>THC:</strong> {thcContent} | <strong>CBD:</strong> {cbdContent}
         </p>
-
       </CardContainer>
     </CardLink>
   );
 }
-

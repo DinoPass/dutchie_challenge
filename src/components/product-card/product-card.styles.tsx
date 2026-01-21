@@ -13,6 +13,16 @@ export const CardContainer = styled.article`
   border-radius: 5px;
   padding: 12px;
   margin: 0 7px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    border-color: #b7c7d6;
+  }
+
+  &:focus-within {
+    outline: 2px solid #7fb5e9;
+    outline-offset: 2px;
+  }
 
   a {
     text-decoration: none;
