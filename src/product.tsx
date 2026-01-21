@@ -1,27 +1,54 @@
 import styled from '@emotion/styled';
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { PageWrapper } from '../src/components/layout/page-wrapper';
+import { fetchProduct, Product } from './queries/productQueries';
 
-export function ProductPage() {
+type ProductPageProp = {
+  name?: string;
+  description?: string;
+  image?: string;
+};
+
+export function ProductPage({ product: testProduct }: { product?: ProductPageProp }) {
+
+  const { id } = useParams<{ id: string }>();
+
+  const { data: fetchedProduct, isLoading, isError } = useQuery({
+  queryKey: ['product', id],
+  queryFn: () => fetchProduct(id as string),
+  enabled: Boolean(id),
+});
+
+  const displayProduct = testProduct ?? fetchedProduct;
+
+  if (isLoading) return <div>Loading…</div>;
+  if (isError || !displayProduct) return <div>Error loading product.</div>;
+
   return (
+    <PageWrapper heading="Your Storefront" icon="menu">
     <Container>
-      <Header>(Placeholder) Cheeba Chews | Sativa Chocolate Taffy</Header>
+      <Header>
+        <ProductName>{displayProduct.name}</ProductName>
+      </Header>
       <Divider />
       <Description>
-        This is a placeholder product detail page. It will contain the description, allotment details, and other product
-        information.
+        {displayProduct.description}
       </Description>
       <ImageContainer>
         <img
-          src={
-            'https://images.dutchie.com/519e2ac68c3968e4b20d9910e3b473aa?auto=format&dpr=2&bg=FFFFFF&crop=faces&fit=crop&max-h=291&max-w=409&min-h=291&min-w=409&ixlib=react-7.2.0'
-          }
+          src={displayProduct.image}
+          alt={displayProduct.name}
+          loading="lazy"
         />
       </ImageContainer>
     </Container>
+    </PageWrapper>
   );
 }
 
 const Container = styled.div`
-  padding: 50px;
+  padding: 1px;
   width: 100%;
 `;
 
@@ -31,20 +58,41 @@ const Header = styled.h1`
   text-align: center;
   margin: 0;
 `;
-
+const ProductName = styled.div`
+  color: #666;
+  font-weight: 600;
+`;
 const Divider = styled.div`
-  width: 50%;
-  height: 1px;
-  background-color: #c8ced4;
-  margin: 20px auto;
+  width: 70px;
+  height: 2px;
+  background-color: #e5e7eb;
+  margin: 16px auto;
+  border-radius: 1px;
 `;
 
 const Description = styled.p`
   text-align: center;
-  padding: 1px;
+  margin: 12px auto 20px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 520px;
+  color: #555;
 `;
 
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 16px;
+
+  img {
+    max-width: 320px;
+    width: 100%;
+    border-radius: 8px;
+  }
+`;
+
+
+const BackLinkWrapper = styled.div`
+  padding-left: 10px;
+  margin-bottom: 20px;
 `;
