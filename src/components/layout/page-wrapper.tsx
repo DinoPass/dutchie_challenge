@@ -13,7 +13,7 @@ export function PageWrapper({ children, heading, icon }: PageWrapperProps) {
     <Container>
       <Header>
         <Icon src={iconSrc} />
-        <Heading>{heading}</Heading>
+          <Heading>{heading}</Heading>
       </Header>
 
       <ContentWrapper>{children}</ContentWrapper>
@@ -56,5 +56,5 @@ const ContentWrapper = styled.div`
   flex: 1 0 0%;
   min-height: 0;
   overflow-y: scroll;
-  padding: 32px;
+  padding: 16px;
 `;

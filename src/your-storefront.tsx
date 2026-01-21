@@ -9,6 +9,7 @@ export function YourStorefront() {
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProducts,
+    staleTime: 1000 * 60 * 5
   });
 
   if (isLoading) {

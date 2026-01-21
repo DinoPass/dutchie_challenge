@@ -1,12 +1,13 @@
-
+// TODO move to dotenv file
 const API_URL = 'http://localhost:1337/get-products';
 
-type Product = {
+export type Product = {
   id: string;
   name: string;
   prices: number[];
   image: string;
   title: string;
+  description?: string;
   strainType: string;
   thcContent: string;
   cbdContent: string;
@@ -17,11 +18,7 @@ export async function fetchProducts(): Promise<Product[]> {
   return res.json();
 }
 
-export async function fetchProduct(id: string) {
-
-  const res = await fetch(API_URL);
-  if (!res.ok) throw new Error('Failed to fetch products');
-  const products = await res.json();
-  return products.find((p: any) => String(p.id) === String(id))
-  
+export async function fetchProduct(id: string): Promise<Product | undefined> {
+  const products = await fetchProducts();
+  return products.find(p => p.id === id);
 }

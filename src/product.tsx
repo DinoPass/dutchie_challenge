@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import {Link, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { fetchProduct } from './queries/productQueries';
+import { PageWrapper } from '../src/components/layout/page-wrapper';
+import { fetchProduct, Product } from './queries/productQueries';
 
 type ProductPageProp = {
   name?: string;
@@ -25,14 +26,9 @@ export function ProductPage({ product: testProduct }: { product?: ProductPagePro
   if (isError || !displayProduct) return <div>Error loading product.</div>;
 
   return (
+    <PageWrapper heading="Your Storefront" icon="menu">
     <Container>
-      <BackLinkWrapper>
-        <BackLink to={'/your-storefront'}>
-          Back to Storefront
-        </BackLink>
-        </BackLinkWrapper>
       <Header>
-
         <ProductName>{displayProduct.name}</ProductName>
       </Header>
       <Divider />
@@ -47,11 +43,12 @@ export function ProductPage({ product: testProduct }: { product?: ProductPagePro
         />
       </ImageContainer>
     </Container>
+    </PageWrapper>
   );
 }
 
 const Container = styled.div`
-  padding: 50px;
+  padding: 1px;
   width: 100%;
 `;
 
@@ -66,55 +63,36 @@ const ProductName = styled.div`
   font-weight: 600;
 `;
 const Divider = styled.div`
-  width: 50%;
-  height: 1px;
-  background-color: #c8ced4;
-  margin: 20px auto;
+  width: 70px;
+  height: 2px;
+  background-color: #e5e7eb;
+  margin: 16px auto;
+  border-radius: 1px;
 `;
 
 const Description = styled.p`
   text-align: center;
-  padding: 1px;
-  margin: 0 auto 0 auto;
-  font-size: 0.9rem;
-  line-height: 1.25rem;
-  width: 85%;
-  max-height: 150px;
-  overflow-y: auto;
+  margin: 12px auto 20px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 520px;
+  color: #555;
 `;
 
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 16px;
+
   img {
-    max-width: 100%;
-    height: auto;
+    max-width: 320px;
+    width: 100%;
+    border-radius: 8px;
   }
 `;
+
 
 const BackLinkWrapper = styled.div`
   padding-left: 10px;
   margin-bottom: 20px;
-`;
-
-const BackLink = styled(Link)`
-  display: inline-block;
-  font-weight: 600;
-  font-size: 0.75rem;
-  padding: 4px 4px;
-  color: #163f66;
-  text-decoration: none;
-  border-radius: 4px;
-
-  &::before {
-    content: "←";
-    margin-right: 8px;
-  }
-
-  &:hover,
-  &:focus {
-    color: #999;
-    outline: 2px solid #eee;
-    outline-offset: 2px;
-  }
 `;

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { CardContainer, Image } from './product-card.styles';
 
-type ProductProps = {
+export type ProductProps = {
   id: string;
   name: string;
   prices: number[];
