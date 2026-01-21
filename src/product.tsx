@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import {Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { PageWrapper } from '../src/components/layout/page-wrapper';
 import { fetchProduct, Product } from './queries/productQueries';
